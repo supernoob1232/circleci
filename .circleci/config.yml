@@ -5,16 +5,8 @@ orbs:
 
 jobs:
   build:
-    executor:
-      name: win/default
+    executor: win/default
     steps:
-      # default shell is Powershell
-      - run:
-         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
-         shell: powershell.exe
-      - run:
-         command: echo hello && echo world
-         shell: bash.exe
-      - run:
-         command: echo hello & echo world
-         shell: cmd.exe
+      - checkout
+      - run: dotnet tool install --global PowerShell
+      - run: pwsh ./<my-script>.ps1
