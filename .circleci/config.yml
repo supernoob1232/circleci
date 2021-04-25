@@ -12,7 +12,18 @@ jobs:
  - restore_cache:
           keys:
       - run:
-          name: "Install project dependencies"
+          name: "Install project dependencies"version: 2.1
+
+orbs:
+  win: circleci/windows@2.2.0
+
+jobs:
+  build:
+    executor: win/default
+    steps:
+      - checkout
+      - run: dotnet tool install --global PowerShell
+      - run: pwsh ./<my-script>.ps1
           command: dotnet.exe restore
       - save_cache:
           paths:
